@@ -113,47 +113,11 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     return firstName.slice(0, 1).toUpperCase() + firstName.slice(1).toLowerCase() + " " + lastName.toUpperCase();
   }
 
-  if (bio.skills.length > 0) {
-    $("#header").append(HTMLskillsStart);
-    for (var i = 0; i < bio.skills.length; ++i) {
-      $("#skills").append(HTMLskills.replace("%data%", bio.skills[i]));
-    }
-  }
-
-  function displayWork()
-  {
-    for (j in work.jobs) {
-      $("#workExperience").append(HTMLworkStart);
-      var job = work.jobs[j];
-      
-      var employer = HTMLworkEmployer.replace("%data%", job.employer);
-      var title = HTMLworkTitle.replace("%data%", job.title);
-      var dates = HTMLworkDates.replace("%data%", job.dates);
-      var locationTxt = HTMLworkLocation.replace("%data%", job.city);
-      var description = HTMLworkDescription.replace("%data%", job.description);
-      $(".work-entry:last").append(employer + title + dates + locationTxt + description);
-    }
-  }
-
-  projects.display = function() {
-    for (p in projects.project) {
-      $("#projects").append(HTMLprojectStart);
-      var project = projects.project[p];
-      var title = HTMLprojectTitle.replace("%data%", project.title);
-      var dates = HTMLprojectDates.replace("%data%", project.dates);
-      var description = HTMLprojectDescription.replace("%data%", project.description);
-      $(".project-entry:last").append(title + dates + description);
-      if (project.images.length > 0) {
-        for (image in project.images) {
-          var image = HTMLprojectImage.replace("%data%", project.images[image]);
-          $(".project-entry:last").append(image);
-        }
-      }
-    }
-  }
-
-  displayWork();
+  bio.display();
+  work.display();
   projects.display();
+  education.display();
+  
   $("#main").append(internationalizeButton);
   $("#mapDiv").append(googleMap);
 
