@@ -1,6 +1,21 @@
+function addCollapsibleElement(id) {
+	var hashId = "#" + id;
+
+	var idDetails = id + "Details";
+	var hashDetails = "#" + idDetails;
+	$(hashId).addClass("collapsible collapsible-close");
+	$(hashId).append('<div id="' + idDetails + '" class="content"></div>');
+  	$(hashId).click(function(e) {
+  		$(hashDetails).fadeToggle();
+  		$(hashId).toggleClass("collapsible-close collapsible-open");
+  		e.stopPropagation();
+  	});
+  	return hashDetails;
+}
+
 var bio = {
 	"name" : "Randal Parsons",
-	"role" : "Component Architect",
+	"role" : "Component Architect and Novice Web Developer",
 	"welcomeMessage" : "Hello",
 	"contacts" : {
 		"mobile" : "+61-425-349-109",
@@ -24,7 +39,13 @@ var bio = {
 		$("#topContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
         $("#topContacts").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
 		$("#topContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
-		
+
+		$("#footerContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
+		$("#footerContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
+		$("#footerContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
+        $("#footerContacts").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
+		$("#footerContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
+
 		$("#header").append(HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage));
 		if (bio.skills.length > 0) {
     		$("#header").append(HTMLskillsStart);
@@ -37,14 +58,14 @@ var bio = {
 
 
 var work = {
-	"jobs" : [ 
+	"jobs" : [
 		{
 			"employer" : "Openlink International",
 			"title": "Senior Development Manager/Architect",
 			"description" : "Manage team in NY & Sydney to develop business components in Java and .NET",
 			"dates worked" : "2006-2014",
 			"location" : "Sydney, Australia"
-		}, 
+		},
 		{
 			"employer" : "Openlink International",
 			"title": "Senior Development Manager/Architect",
@@ -59,7 +80,7 @@ var work = {
 			"dates worked" : "2003-2005",
 			"location" : "Sydney, Australia"
 		} ,
-		
+
 		{
 			"employer" : "Openlink International",
 			"title": "Senior Development Manager/Architect",
@@ -80,7 +101,7 @@ var work = {
 			"description" : "Develop analytic components in COM.",
 			"dates worked" : "1999-2000",
 			"location" : "Sydney, Australia"
-		}, 
+		},
 		{
 			"employer" : "Bankers Trust Australia",
 			"title": "Vice President, Derivatives Technology",
@@ -90,10 +111,10 @@ var work = {
 		}
 	],
 	"display" : function() {
+		var parentId = addCollapsibleElement("workExperience");
 	    for (j in work.jobs) {
-	    	$("#workExperience").append(HTMLworkStart);
+	    	$(parentId).append(HTMLworkStart);
 	      	var job = work.jobs[j];
-	      
 	     	var employer = HTMLworkEmployer.replace("%data%", job.employer);
 	      	var title = HTMLworkTitle.replace("%data%", job.title);
 	      	var dates = HTMLworkDates.replace("%data%", job["dates worked"]);
@@ -101,6 +122,7 @@ var work = {
 	      	var description = HTMLworkDescription.replace("%data%", job.description);
 	     	$(".work-entry:last").append(employer + title + dates + location + description);
 	 	}
+		$("#workExperience").prepend(HTMLcollapsible);
 	 }
 };
 
@@ -126,8 +148,9 @@ var projects = {
 		}
 	],
 	"display" : function() {
+		var parentId = addCollapsibleElement("projects");
 		for (var p in projects.project) {
-	    	$("#projects").append(HTMLprojectStart);
+	    	$(parentId).append(HTMLprojectStart);
 	      	var project = projects.project[p];
 	      	var title = HTMLprojectTitle.replace("%data%", project.title);
 	      	var dates = HTMLprojectDates.replace("%data%", project["dates worked"]);
@@ -207,8 +230,9 @@ var education = {
 	 	}
 	],
 	"display" : function() {
+		var parentId = addCollapsibleElement("education");
     	for (var s in education.schools) {
-      		$("#education").append(HTMLschoolStart);
+      		$(parentId).append(HTMLschoolStart);
             var school = education.schools[s];
 		    var name = HTMLschoolName.replace("%data%", school.name);
 		    var degree = HTMLschoolDegree.replace("%data%", school.degree);
@@ -222,15 +246,15 @@ var education = {
 		    }
 	    }
 	    if (education.onlineCourses.length > 0) {
-      		$("#education").append(HTMLschoolStart);
-	    	$(".education-entry:last").append(HTMLonlineClasses);
-	      	for (var o in education.onlineCourses) {
+	    	$(parentId).append(HTMLonlineClasses);
+			parentId = addCollapsibleElement("onlineCourses");
+      		for (var o in education.onlineCourses) {
 	        	var course = education.onlineCourses[o];
 		        var title = HTMLonlineTitle.replace("%data%", course.title);
 		        var school = HTMLonlineSchool.replace("%data%", course.school);
 		        var dates = HTMLonlineDates.replace("%data%", course["dates attended"]);
 		        var url = HTMLonlineURL.replace("%data%", course.url);
-		        $(".education-entry:last").append(title + school + dates + url);
+		        $(parentId).append(title + school + dates + url);
 		    }
 		}
 	}

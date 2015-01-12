@@ -8,9 +8,47 @@
   overflow: auto;
 }
 
-.education-entry, .work-entry, .project-entry {
-  padding-left: 5%;
-  padding-right: 5%;
+.collapsible {
+  border:#fff 1px solid;
+}
+
+.collapsible-close,
+#onlineCourses.collapsible-close {
+  background-color: #c5cae9;
+}
+
+.collapsible-close div {
+  display: none;
+}
+
+.collapsible-open,
+ #onlineCourses.collapsible-open {
+  background-color: #8c9eff;
+}
+
+.collapsible-open div {
+  background-color: #e8eaf6;
+}
+
+.collapsible span {
+  display:block;
+  float: right;
+  padding: 24px;
+}
+
+.collapsible-open span {
+  background:url(../images/minus.png) center no-repeat;
+}
+
+.collapsible-close span {
+  background:url(../images/plus.png) center no-repeat;
+}
+
+.education-entry,
+.work-entry,
+.project-entry,
+#onlineCoursesDetails {
+  padding: 1px 5% 10px;
 }
 
 .gm-style-iw {
@@ -18,38 +56,35 @@
 }
 
 h2,
+h3,
 h4,
 h5 {
   padding: 10px;
   padding-left: 5%;
   padding-right: 5%;
+  position: relative;
 }
 
 h1 {
 
   font-size: 40px;
-  color: #f07c17;
+  color: #fff;
   line-height: 48px;
   display: inline;
 }
 
 h2 {
-  font-style: bold;
   font-size: 24px;
-  color: #333;
-  line-height: 29px;
+  line-height: 26px;
 }
 
 h3 {
-  padding: 20px 0 0;
   font-style: italic;
   font-size: 20px;
-  color: #333;
   line-height: 22px;
 }
 
 h4 {
-  font-style: bold;
   font-size: 14px;
   color: #4a4a4a;
   line-height: 17px;
@@ -110,16 +145,17 @@ a {
 }
 
 #skillsH3 {
-  color: #f07c17;
+  color: #e8eaf6;
   padding-left: 5%;
 }
 
 .orange {
-  background-color: #f07c17;
+  color: #fff;
+  background-color: #3f51b5;
 }
 
 .orange-text {
-  color: #f07c17;
+  color: #e8eaf6;
 }
 
 .white-text {
@@ -134,11 +170,15 @@ a {
 }
 
 .dark-gray {
-  background-color: #4a4a4a;
+  background-color: #5c6bc0;
 }
 
 #header {
-  background-color: #6a6a6a;
+  background-color: #3949ab;
+}
+
+#header span {
+  color:  #fff;
 }
 
 .flex-box {
@@ -218,13 +258,11 @@ span {
 #map {
   display: block;
   height: 100%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 0 5%;
 }
 
 #mapDiv {
   height: 400px;
-  width: 100%;
   padding-bottom: 5%;
 }
 
